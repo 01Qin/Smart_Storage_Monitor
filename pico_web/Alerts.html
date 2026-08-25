@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Storage Monitor</title>
+    <link rel="stylesheet" href="Alerts.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <header>
+        <div class="brand">
+            <div class="icon-box">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                </svg>
+            </div>
+            <div class="title-area">
+                <h1>SMART STORAGE MONITOR</h1>
+                <span>Node · SRG-001 · Warehouse A · Bay 12</span>
+            </div>
+        </div>
+        <div class="header-status">
+            <span>📶 WIFI LINK</span>
+            <div class="status-badge"><div class="dot"></div> NOMINAL</div>
+            <span id="live-clock">14:12:07</span>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs">
+        <ul>
+            <!--      <li><img src="img/logo.jpg" alt="logo" ></li>-->
+            <li><a href="Overview.html">OVERVIEW</a></li>
+            <li><a href="Accelerometer.html">ACCELEROMETER</a></li>
+            <li><a href="Alerts.html" class="active">ALERTS</a></li>
+        </ul>
+    </nav>
+
+    <!-- ================= PAGE 3: ALERTS ================= -->
+    <div id="page-alerts" class="page-content active">
+        <div class="sensor-card">
+            <div class="alert-log-header">
+                <span>ALERT LOG — <span id="alert-entries-text">10 ENTRIES</span></span>
+                <button id="resolve-all-btn" class="secondary-btn">Resolve all</button>
+            </div>
+
+            <div id="alert-list-container" class="alert-list">
+                <div class="alert-row">
+                    <div class="alert-info">
+                        <div class="alert-title-line">
+                            <span class="alert-dot"></span>
+                            <span class="alert-title">Accelerometer spike — possible tamper event detected</span>
+                        </div>
+                        <div class="alert-meta">ACCEL_SPIKE · 14:07:55</div>
+                    </div>
+                    <button class="secondary-btn resolve-btn">Resolve</button>
+                </div>
+
+                <div class="alert-row">
+                    <div class="alert-info">
+                        <div class="alert-title-line">
+                            <span class="alert-dot"></span>
+                            <span class="alert-title">Accelerometer spike — possible tamper event detected</span>
+                        </div>
+                        <div class="alert-meta">ACCEL_SPIKE · 14:07:52</div>
+                    </div>
+                    <button class="secondary-btn resolve-btn">Resolve</button>
+                </div>
+
+                <div class="alert-row">
+                    <div class="alert-info">
+                        <div class="alert-title-line">
+                            <span class="alert-dot"></span>
+                            <span class="alert-title">Accelerometer spike — possible tamper event detected</span>
+                        </div>
+                        <div class="alert-meta">ACCEL_SPIKE · 14:07:24</div>
+                    </div>
+                    <button class="secondary-btn resolve-btn">Resolve</button>
+                </div>
+
+                <div class="alert-row">
+                    <div class="alert-info">
+                        <div class="alert-title-line">
+                            <span class="alert-dot"></span>
+                            <span class="alert-title">Accelerometer spike — possible tamper event detected</span>
+                        </div>
+                        <div class="alert-meta">ACCEL_SPIKE · 13:51:06</div>
+                    </div>
+                    <button class="secondary-btn resolve-btn">Resolve</button>
+                </div>
+
+                <div class="alert-row">
+                    <div class="alert-info">
+                        <div class="alert-title-line">
+                            <span class="alert-dot"></span>
+                            <span class="alert-title">Accelerometer spike — possible tamper event detected</span>
+                        </div>
+                        <div class="alert-meta">ACCEL_SPIKE · 13:50:43</div>
+                    </div>
+                    <button class="secondary-btn resolve-btn">Resolve</button>
+                </div>
+
+                <div class="alert-row">
+                    <div class="alert-info">
+                        <div class="alert-title-line">
+                            <span class="alert-dot"></span>
+                            <span class="alert-title">Accelerometer spike — possible tamper event detected</span>
+                        </div>
+                        <div class="alert-meta">ACCEL_SPIKE · 13:50:22</div>
+                    </div>
+                    <button class="secondary-btn resolve-btn">Resolve</button>
+                </div>
+
+                <div class="alert-row">
+                    <div class="alert-info">
+                        <div class="alert-title-line">
+                            <span class="alert-dot"></span>
+                            <span class="alert-title">Accelerometer spike — possible tamper event detected</span>
+                        </div>
+                        <div class="alert-meta">ACCEL_SPIKE · 13:50:16</div>
+                    </div>
+                    <button class="secondary-btn resolve-btn">Resolve</button>
+                </div>
+
+                <div class="alert-row">
+                    <div class="alert-info">
+                        <div class="alert-title-line">
+                            <span class="alert-dot"></span>
+                            <span class="alert-title">Accelerometer spike — possible tamper event detected</span>
+                        </div>
+                        <div class="alert-meta">ACCEL_SPIKE · 13:50:09</div>
+                    </div>
+                    <button class="secondary-btn resolve-btn">Resolve</button>
+                </div>
+
+                <div class="alert-row">
+                    <div class="alert-info">
+                        <div class="alert-title-line">
+                            <span class="alert-dot"></span>
+                            <span class="alert-title">Accelerometer spike — possible tamper event detected</span>
+                        </div>
+                        <div class="alert-meta">ACCEL_SPIKE · 13:50:03</div>
+                    </div>
+                    <button class="secondary-btn resolve-btn">Resolve</button>
+                </div>
+
+                <div class="alert-row">
+                    <div class="alert-info">
+                        <div class="alert-title-line">
+                            <span class="alert-dot"></span>
+                            <span class="alert-title">Accelerometer spike — possible tamper event detected</span>
+                        </div>
+                        <div class="alert-meta">ACCEL_SPIKE · 13:48:11</div>
+                    </div>
+                    <button class="secondary-btn resolve-btn">Resolve</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- JavaScript Logic -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Clock & Header elements
+        const liveClock = document.getElementById('live-clock');
+        const lastUpdate = document.getElementById('last-update');
+
+        // Tabs
+        const tabOverview = document.getElementById('tab-overview');
+        const tabAccelerometer = document.getElementById('tab-accelerometer');
+        const tabAlerts = document.getElementById('tab-alerts');
+
+        // Pages
+        const pageOverview = document.getElementById('page-overview');
+        const pageAccelerometer = document.getElementById('page-accelerometer');
+        const pageAlerts = document.getElementById('page-alerts');
+
+        // Fan Controls
+        const fanBtn = document.getElementById('fan-btn');
+        const fanStatus = document.getElementById('fan-status');
+        const fanCycle = document.getElementById('fan-cycle-text');
+
+        // Temp & Humidity
+        const tempVal = document.getElementById('temp-val');
+        const tempGauge = document.getElementById('temp-gauge');
+        const humVal = document.getElementById('hum-val');
+        const humSubVal = document.getElementById('hum-subval');
+
+        // Accelerometer
+        const valX = document.getElementById('val-x');
+        const valY = document.getElementById('val-y');
+        const valZ = document.getElementById('val-z');
+        const barX = document.getElementById('bar-x');
+        const barY = document.getElementById('bar-y');
+        const barZ = document.getElementById('bar-z');
+
+        const rawX = document.getElementById('raw-x');
+        const rawY = document.getElementById('raw-y');
+        const rawZ = document.getElementById('raw-z');
+        const rawMag = document.getElementById('raw-mag');
+        const rawTime = document.getElementById('raw-time');
+
+        // Alerts Logic
+        const resolveAllBtn = document.getElementById('resolve-all-btn');
+        const alertContainer = document.getElementById('alert-list-container');
+        const alertEntriesText = document.getElementById('alert-entries-text');
+        const alertCountBadge = document.querySelectorAll('.alert-count-val');
+
+        let fanOn = false;
+
+        // Tab Switching Handler
+        function switchTab(activeBtn, activePage) {
+            [tabOverview, tabAccelerometer, tabAlerts].forEach(btn => btn.classList.remove('active'));
+            [pageOverview, pageAccelerometer, pageAlerts].forEach(page => page.classList.remove('active'));
+
+            activeBtn.classList.add('active');
+            activePage.classList.add('active');
+        }
+
+        tabOverview.addEventListener('click', () => switchTab(tabOverview, pageOverview));
+        tabAccelerometer.addEventListener('click', () => switchTab(tabAccelerometer, pageAccelerometer));
+        tabAlerts.addEventListener('click', () => switchTab(tabAlerts, pageAlerts));
+
+        // Real-time Clock Function
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toTimeString().split(' ')[0];
+            if (liveClock) liveClock.textContent = timeStr;
+            if (lastUpdate) lastUpdate.textContent = timeStr.substring(0, 5);
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Interactive Fan Toggle
+        if (fanBtn) {
+            fanBtn.addEventListener('click', () => {
+                fanOn = !fanOn;
+                if (fanOn) {
+                    fanStatus.textContent = "RUNNING";
+                    fanStatus.style.color = "var(--primary-blue)";
+                    fanCycle.textContent = "ACTIVE";
+                    fanCycle.style.color = "var(--primary-blue)";
+                } else {
+                    fanStatus.textContent = "OFF";
+                    fanStatus.style.color = "var(--accent-green)";
+                    fanCycle.textContent = "IDLE";
+                    fanCycle.style.color = "var(--accent-green)";
+                }
+            });
+        }
+
+        // Alert Resolution System
+        function updateAlertCounts() {
+            const remainingAlerts = alertContainer.querySelectorAll('.alert-row').length;
+            alertEntriesText.textContent = remainingAlerts + " ENTRIES";
+            alertCountBadge.forEach(badge => badge.textContent = remainingAlerts);
+
+            if (remainingAlerts === 0) {
+                alertContainer.innerHTML = '<div style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 13px;">No unresolved alerts remaining.</div>';
+            }
+        }
+
+        alertContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('resolve-btn')) {
+                const row = e.target.closest('.alert-row');
+                if (row) {
+                    row.style.opacity = '0';
+                    setTimeout(() => {
+                        row.remove();
+                        updateAlertCounts();
+                    }, 200);
+                }
+            }
+        });
+
+        if (resolveAllBtn) {
+            resolveAllBtn.addEventListener('click', () => {
+                alertContainer.innerHTML = '';
+                updateAlertCounts();
+            });
+        }
+
+        // Simulated Sensor Data Fluctuation
+        setInterval(() => {
+            // Temperature Fluctuation
+            if (tempVal && tempGauge) {
+                let currentTemp = parseFloat(tempVal.textContent);
+                let tempDelta = (Math.random() - 0.5) * 0.4;
+                let newTemp = (currentTemp + tempDelta).toFixed(1);
+                tempVal.textContent = newTemp;
+
+                let tempGaugeOffset = Math.max(0, Math.min(125, 125 - (newTemp * 2.5)));
+                tempGauge.style.strokeDashoffset = tempGaugeOffset;
+            }
+
+            // Humidity Fluctuation
+            if (humVal && humSubVal) {
+                let currentHum = parseFloat(humVal.textContent);
+                let humDelta = (Math.random() - 0.5) * 0.6;
+                let newHum = (currentHum + humDelta).toFixed(1);
+                humVal.textContent = newHum;
+                humSubVal.textContent = newHum + "%";
+            }
+
+            // Accelerometer Jitter
+            let x = -0.195232 + (Math.random() - 0.5) * 0.01;
+            let y = 0.189070 + (Math.random() - 0.5) * 0.01;
+            let z = 0.850000 + (Math.random() - 0.5) * 0.01;
+            let mag = Math.sqrt(x*x + y*y + z*z);
+
+            if (valX) {
+                valX.textContent = (x >= 0 ? "+" : "") + x.toFixed(3) + "g";
+                valY.textContent = (y >= 0 ? "+" : "") + y.toFixed(3) + "g";
+                valZ.textContent = (z >= 0 ? "+" : "") + z.toFixed(3) + "g";
+
+                barX.style.width = Math.abs(x) * 100 + "%";
+                barY.style.width = Math.abs(y) * 100 + "%";
+                barZ.style.width = Math.abs(z) * 100 + "%";
+
+                rawX.textContent = x.toFixed(6);
+                rawY.textContent = y.toFixed(6);
+                rawZ.textContent = z.toFixed(6);
+                rawMag.textContent = mag.toFixed(6);
+                rawTime.textContent = new Date().toISOString();
+            }
+
+        }, 2000);
+    });
+</script>
+</body>
+</html>

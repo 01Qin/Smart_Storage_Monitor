@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Storage Monitor</title>
+  <!-- External CSS File -->
+  <link rel="stylesheet" href="overview.css">
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <div class="icon-box">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+        </svg>
+      </div>
+      <div class="title-area">
+        <h1>SMART STORAGE MONITOR</h1>
+        <span>Node · SRG-001 · Warehouse A · Bay 12</span>
+      </div>
+    </div>
+    <div class="header-status">
+      <span>📶 WIFI LINK</span>
+      <div class="status-badge"><div class="dot"></div> NOMINAL</div>
+      <span id="live-clock">13:50:21</span>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="tabs">
+    <ul>
+<!--      <li><img src="img/logo.jpg" alt="logo" ></li>-->
+      <li><a href="Overview.html" class="active">OVERVIEW</a></li>
+      <li><a href="Accelerometer.html">ACCELEROMETER</a></li>
+      <li><a href="Alerts.html">ALERTS</a></li>
+    </ul>
+  </nav>
+
+  <!-- Main Dashboard Grid -->
+  <div class="dashboard-grid">
+
+    <!-- Temperature Card -->
+    <div class="sensor-card">
+      <div class="card-header">
+        <span>TEMPERATURE</span>
+        <span style="color: var(--text-muted);">NORMAL</span>
+      </div>
+
+      <div class="gauge-container">
+        <svg class="gauge-svg" viewBox="0 0 100 50">
+          <path class="gauge-bg" d="M 10 50 A 40 40 0 0 1 90 50" />
+          <path id="temp-gauge" class="gauge-fill" d="M 10 50 A 40 40 0 0 1 90 50" />
+        </svg>
+        <div class="reading-value"><span id="temp-val">24.5</span><span class="reading-unit">°C</span></div>
+        <div class="reading-label">CELSIUS</div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-subcard">
+          <span class="subcard-label">WARN AT</span>
+          <span class="subcard-val">30°C</span>
+        </div>
+        <div class="metric-subcard">
+          <span class="subcard-label">DANGER AT</span>
+          <span class="subcard-val" style="color: var(--accent-danger);">35°C</span>
+        </div>
+        <div class="metric-subcard">
+          <span class="subcard-label">FAN</span>
+          <span id="fan-status" class="subcard-val" style="color: var(--accent-green);">OFF</span>
+          <button class="control-btn" id="fan-btn">Toggle</button>
+        </div>
+      </div>
+
+      <div class="chart-box">
+        <div class="chart-title">60-SAMPLE TREND</div>
+        <svg class="sparkline" viewBox="0 0 200 40">
+          <path class="sparkline-path" d="M 0 30 Q 20 20, 40 25 T 80 15 T 120 22 T 160 18 L 200 28" />
+        </svg>
+      </div>
+    </div>
+
+    <!-- Humidity Card -->
+    <div class="sensor-card">
+      <div class="card-header">
+        <span>HUMIDITY</span>
+        <span style="color: var(--text-muted);">NORMAL</span>
+      </div>
+
+      <div class="gauge-container">
+        <svg class="gauge-svg" viewBox="0 0 100 50">
+          <path class="gauge-bg" d="M 10 50 A 40 40 0 0 1 90 50" />
+          <path id="hum-gauge" class="gauge-fill" d="M 10 50 A 40 40 0 0 1 90 50" stroke-dashoffset="60" />
+        </svg>
+        <div class="reading-value"><span id="hum-val">58.5</span><span class="reading-unit">%</span></div>
+        <div class="reading-label">RELATIVE %</div>
+      </div>
+
+      <div class="metrics-row">
+        <div class="metric-subcard">
+          <span class="subcard-label">IDEAL RANGE</span>
+          <span class="subcard-val">40–70%</span>
+        </div>
+        <div class="metric-subcard">
+          <span class="subcard-label">CURRENT</span>
+          <span class="subcard-val" id="hum-subval">58.5%</span>
+        </div>
+        <div class="metric-subcard">
+          <span class="subcard-label">DEW POINT</span>
+          <span class="subcard-val">16.2°C</span>
+        </div>
+      </div>
+
+      <div class="chart-box">
+        <div class="chart-title">60-SAMPLE TREND</div>
+        <svg class="sparkline" viewBox="0 0 200 40">
+          <path class="sparkline-path" d="M 0 20 Q 20 28, 40 22 T 80 30 T 120 18 T 160 20 L 200 25" />
+        </svg>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom Metrics Bar -->
+  <div class="bottom-bar">
+    <div class="metric-subcard">
+      <span class="subcard-label">UPTIME</span>
+      <span class="subcard-val">14d 06h</span>
+    </div>
+    <div class="metric-subcard">
+      <span class="subcard-label">ALERTS TOTAL</span>
+      <span class="subcard-val">4</span>
+    </div>
+    <div class="metric-subcard">
+      <span class="subcard-label">UNRESOLVED</span>
+      <span class="subcard-val" style="color: var(--accent-warn);">4</span>
+    </div>
+    <div class="metric-subcard">
+      <span class="subcard-label">FAN CYCLES</span>
+      <span id="fan-cycle-text" class="subcard-val" style="color: var(--accent-green);">IDLE</span>
+    </div>
+    <div class="metric-subcard">
+      <span class="subcard-label">WIFI</span>
+      <span class="subcard-val" style="color: var(--accent-green);">LINKED</span>
+    </div>
+    <div class="metric-subcard">
+      <span class="subcard-label">LAST UPDATE</span>
+      <span class="subcard-val" id="last-update">13:50</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- JavaScript Embedded Directly Here -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const liveClock = document.getElementById('live-clock');
+    const lastUpdate = document.getElementById('last-update');
+    const fanBtn = document.getElementById('fan-btn');
+    const fanStatus = document.getElementById('fan-status');
+    const fanCycle = document.getElementById('fan-cycle-text');
+
+    const tempVal = document.getElementById('temp-val');
+    const tempGauge = document.getElementById('temp-gauge');
+
+    const humVal = document.getElementById('hum-val');
+    const humSubVal = document.getElementById('hum-subval');
+
+    let fanOn = false;
+
+    // Real-time Clock Function
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toTimeString().split(' ')[0];
+      if (liveClock) liveClock.textContent = timeStr;
+      if (lastUpdate) lastUpdate.textContent = timeStr.substring(0, 5);
+    }
+
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Interactive Fan Toggle
+    if (fanBtn) {
+      fanBtn.addEventListener('click', () => {
+        fanOn = !fanOn;
+        if (fanOn) {
+          fanStatus.textContent = "RUNNING";
+          fanStatus.style.color = "var(--primary-blue)";
+          fanCycle.textContent = "ACTIVE";
+          fanCycle.style.color = "var(--primary-blue)";
+        } else {
+          fanStatus.textContent = "OFF";
+          fanStatus.style.color = "var(--accent-green)";
+          fanCycle.textContent = "IDLE";
+          fanCycle.style.color = "var(--accent-green)";
+        }
+      });
+    }
+
+    // Simulated Sensor Data Fluctuation
+    setInterval(() => {
+      // Temperature Fluctuation
+      if (tempVal && tempGauge) {
+        let currentTemp = parseFloat(tempVal.textContent);
+        let tempDelta = (Math.random() - 0.5) * 0.4;
+        let newTemp = (currentTemp + tempDelta).toFixed(1);
+        tempVal.textContent = newTemp;
+
+        // Update Gauge Curve Offset
+        let tempGaugeOffset = Math.max(0, Math.min(125, 125 - (newTemp * 2.5)));
+        tempGauge.style.strokeDashoffset = tempGaugeOffset;
+      }
+
+      // Humidity Fluctuation
+      if (humVal && humSubVal) {
+        let currentHum = parseFloat(humVal.textContent);
+        let humDelta = (Math.random() - 0.5) * 0.6;
+        let newHum = (currentHum + humDelta).toFixed(1);
+        humVal.textContent = newHum;
+        humSubVal.textContent = newHum + "%";
+      }
+    }, 3000);
+  });
+</script>
+</body>
+</html>

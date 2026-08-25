@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Storage Monitor</title>
+    <link rel="stylesheet" href="Accelerometer.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Header -->
+    <header>
+        <div class="brand">
+            <div class="icon-box">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                </svg>
+            </div>
+            <div class="title-area">
+                <h1>SMART STORAGE MONITOR</h1>
+                <span>Node · SRG-001 · Warehouse A · Bay 12</span>
+            </div>
+        </div>
+        <div class="header-status">
+            <span>📶 WIFI LINK</span>
+            <div class="status-badge"><div class="dot"></div> NOMINAL</div>
+            <span id="live-clock">14:07:34</span>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs">
+        <ul>
+            <!--      <li><img src="img/logo.jpg" alt="logo" ></li>-->
+            <li><a href="Overview.html">OVERVIEW</a></li>
+            <li><a href="Accelerometer.html" class="active">ACCELEROMETER</a></li>
+            <li><a href="Alerts.html">ALERTS</a></li>
+        </ul>
+    </nav>
+
+
+
+    <!-- ================= PAGE 2: ACCELEROMETER ================= -->
+    <div id="page-accelerometer" class="page-content active">
+        <div class="dashboard-grid">
+
+            <!-- Accelerometer Visualization -->
+            <div class="sensor-card">
+                <div class="card-header">
+                    <span>ACCELEROMETER · LIS3DH</span>
+                    <span style="color: var(--accent-green); font-weight: bold;">✓ STABLE</span>
+                </div>
+
+                <!-- Axis Bars -->
+                <div class="axis-container">
+                    <!-- X Axis -->
+                    <div class="axis-row">
+                        <span class="axis-label">X</span>
+                        <div class="axis-bar-bg">
+                            <div id="bar-x" class="axis-bar-fill" style="width: 20%;"></div>
+                        </div>
+                        <span id="val-x" class="axis-val">-0.195g</span>
+                    </div>
+
+                    <!-- Y Axis -->
+                    <div class="axis-row">
+                        <span class="axis-label">Y</span>
+                        <div class="axis-bar-bg">
+                            <div id="bar-y" class="axis-bar-fill" style="width: 19%;"></div>
+                        </div>
+                        <span id="val-y" class="axis-val">+0.189g</span>
+                    </div>
+
+                    <!-- Z Axis -->
+                    <div class="axis-row">
+                        <span class="axis-label">Z</span>
+                        <div class="axis-bar-bg">
+                            <div id="bar-z" class="axis-bar-fill" style="width: 85%;"></div>
+                        </div>
+                        <span id="val-z" class="axis-val">+0.850g</span>
+                    </div>
+                </div>
+
+                <!-- Config Subcards -->
+                <div class="metrics-row">
+                    <div class="metric-subcard">
+                        <span class="subcard-label">THRESHOLD</span>
+                        <span class="subcard-val">±0.6g</span>
+                    </div>
+                    <div class="metric-subcard">
+                        <span class="subcard-label">SAMPLE RATE</span>
+                        <span class="subcard-val">100 Hz</span>
+                    </div>
+                    <div class="metric-subcard">
+                        <span class="subcard-label">RANGE</span>
+                        <span class="subcard-val">±2g</span>
+                    </div>
+                </div>
+
+                <!-- Information Callout Box -->
+                <div class="info-box">
+                    Tamper is detected when any axis exceeds ±0.6g from baseline.
+                    Z-axis at rest ≈ +1.000g (gravity). Sudden deviation triggers WiFi alert.
+                </div>
+            </div>
+
+            <!-- Raw Telemetry Readings Card -->
+            <div class="sensor-card">
+                <div class="card-header">
+                    <span>RAW READINGS</span>
+                </div>
+
+                <div class="raw-readings-list">
+                    <div class="raw-item">
+                        <span class="raw-label">accel_x</span>
+                        <span id="raw-x" class="raw-value">-0.195232</span>
+                    </div>
+                    <div class="raw-item">
+                        <span class="raw-label">accel_y</span>
+                        <span id="raw-y" class="raw-value">0.189070</span>
+                    </div>
+                    <div class="raw-item">
+                        <span class="raw-label">accel_z</span>
+                        <span id="raw-z" class="raw-value">0.850000</span>
+                    </div>
+                    <div class="raw-item">
+                        <span class="raw-label">magnitude</span>
+                        <span id="raw-mag" class="raw-value">0.892392</span>
+                    </div>
+                    <div class="raw-item">
+                        <span class="raw-label">timestamp</span>
+                        <span id="raw-time" class="raw-value">2026-08-14T11:07:34.668Z</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- JavaScript Logic -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Clock & Update elements
+        const liveClock = document.getElementById('live-clock');
+        const lastUpdate = document.getElementById('last-update');
+
+        // Tabs
+        const tabOverview = document.getElementById('tab-overview');
+        const tabAccelerometer = document.getElementById('tab-accelerometer');
+        const pageOverview = document.getElementById('page-overview');
+        const pageAccelerometer = document.getElementById('page-accelerometer');
+
+        // Fan Controls
+        const fanBtn = document.getElementById('fan-btn');
+        const fanStatus = document.getElementById('fan-status');
+        const fanCycle = document.getElementById('fan-cycle-text');
+
+        // Temp & Humidity Sensors
+        const tempVal = document.getElementById('temp-val');
+        const tempGauge = document.getElementById('temp-gauge');
+        const humVal = document.getElementById('hum-val');
+        const humSubVal = document.getElementById('hum-subval');
+
+        // Accelerometer Elements
+        const valX = document.getElementById('val-x');
+        const valY = document.getElementById('val-y');
+        const valZ = document.getElementById('val-z');
+        const barX = document.getElementById('bar-x');
+        const barY = document.getElementById('bar-y');
+        const barZ = document.getElementById('bar-z');
+
+        const rawX = document.getElementById('raw-x');
+        const rawY = document.getElementById('raw-y');
+        const rawZ = document.getElementById('raw-z');
+        const rawMag = document.getElementById('raw-mag');
+        const rawTime = document.getElementById('raw-time');
+
+        let fanOn = false;
+
+        // Tab Switching Logic
+        tabOverview.addEventListener('click', () => {
+            tabOverview.classList.add('active');
+            tabAccelerometer.classList.remove('active');
+            pageOverview.classList.add('active');
+            pageAccelerometer.classList.remove('active');
+        });
+
+        tabAccelerometer.addEventListener('click', () => {
+            tabAccelerometer.classList.add('active');
+            tabOverview.classList.remove('active');
+            pageAccelerometer.classList.add('active');
+            pageOverview.classList.remove('active');
+        });
+
+        // Real-time Clock Function
+        function updateClock() {
+            const now = new Date();
+            const timeStr = now.toTimeString().split(' ')[0];
+            if (liveClock) liveClock.textContent = timeStr;
+            if (lastUpdate) lastUpdate.textContent = timeStr.substring(0, 5);
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Interactive Fan Toggle
+        if (fanBtn) {
+            fanBtn.addEventListener('click', () => {
+                fanOn = !fanOn;
+                if (fanOn) {
+                    fanStatus.textContent = "RUNNING";
+                    fanStatus.style.color = "var(--primary-blue)";
+                    fanCycle.textContent = "ACTIVE";
+                    fanCycle.style.color = "var(--primary-blue)";
+                } else {
+                    fanStatus.textContent = "OFF";
+                    fanStatus.style.color = "var(--accent-green)";
+                    fanCycle.textContent = "IDLE";
+                    fanCycle.style.color = "var(--accent-green)";
+                }
+            });
+        }
+
+        // Simulated Sensor Data Fluctuation
+        setInterval(() => {
+            // Temperature Fluctuation
+            if (tempVal && tempGauge) {
+                let currentTemp = parseFloat(tempVal.textContent);
+                let tempDelta = (Math.random() - 0.5) * 0.4;
+                let newTemp = (currentTemp + tempDelta).toFixed(1);
+                tempVal.textContent = newTemp;
+
+                let tempGaugeOffset = Math.max(0, Math.min(125, 125 - (newTemp * 2.5)));
+                tempGauge.style.strokeDashoffset = tempGaugeOffset;
+            }
+
+            // Humidity Fluctuation
+            if (humVal && humSubVal) {
+                let currentHum = parseFloat(humVal.textContent);
+                let humDelta = (Math.random() - 0.5) * 0.6;
+                let newHum = (currentHum + humDelta).toFixed(1);
+                humVal.textContent = newHum;
+                humSubVal.textContent = newHum + "%";
+            }
+
+            // Accelerometer Jitter (Live MPU-6050 update)
+            let x = -0.195232 + (Math.random() - 0.5) * 0.01;
+            let y = 0.189070 + (Math.random() - 0.5) * 0.01;
+            let z = 0.850000 + (Math.random() - 0.5) * 0.01;
+            let mag = Math.sqrt(x*x + y*y + z*z);
+
+            valX.textContent = (x >= 0 ? "+" : "") + x.toFixed(3) + "g";
+            valY.textContent = (y >= 0 ? "+" : "") + y.toFixed(3) + "g";
+            valZ.textContent = (z >= 0 ? "+" : "") + z.toFixed(3) + "g";
+
+            barX.style.width = Math.abs(x) * 100 + "%";
+            barY.style.width = Math.abs(y) * 100 + "%";
+            barZ.style.width = Math.abs(z) * 100 + "%";
+
+            rawX.textContent = x.toFixed(6);
+            rawY.textContent = y.toFixed(6);
+            rawZ.textContent = z.toFixed(6);
+            rawMag.textContent = mag.toFixed(6);
+            rawTime.textContent = new Date().toISOString();
+
+        }, 2000);
+    });
+</script>
+</body>
+</html>
