@@ -2,7 +2,7 @@
 // Created by Quinn on 8/18/2026.
 //
 
-#include "Counrdown.h"
+#include "Countdown.h"
 
 
 Countdown::Countdown() {

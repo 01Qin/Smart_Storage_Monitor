@@ -5918,10 +5918,9 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "c9dac03c-0ec5-49b8-a772-4f3986849d52")
 		(property "Reference" "R2"
-			(at 102.87 54.61 90)
+			(at 102.616 64.516 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -5931,7 +5930,7 @@
 			)
 		)
 		(property "Value" "240k"
-			(at 102.87 57.15 90)
+			(at 102.616 67.056 90)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
