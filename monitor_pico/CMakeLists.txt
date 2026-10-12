@@ -25,10 +25,10 @@ add_compile_options(-Wall
 add_executable(${PROJECT_NAME} 
         main.c
         wifi.c
-        IPStack.c
-        IPStack.h
-        Counrdown.c
-        Counrdown.h
+#        IPStack.c
+#        IPStack.h
+#        Countdown.c
+#        Countdown.h
 
 
 )

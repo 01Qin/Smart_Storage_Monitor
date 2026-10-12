@@ -63,6 +63,8 @@ void AHT20_Measure (void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define BlueLed_Pin GPIO_PIN_4
+#define BlueLed_GPIO_Port GPIOA
 #define Tach_Pin GPIO_PIN_15
 #define Tach_GPIO_Port GPIOA
 
