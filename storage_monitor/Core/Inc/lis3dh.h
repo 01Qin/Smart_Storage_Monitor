@@ -17,7 +17,10 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+void LIS3DH_write(uint8_t reg_addr, uint8_t value);
+void LIS3DH_read_accel(uint8_t reg_addr);
+void LIS3DH_init(uint8_t reg_addr);
+void LIS3DH_read_temp(uint8_t reg_addr);
 
 /* USER CODE END PTD */
 

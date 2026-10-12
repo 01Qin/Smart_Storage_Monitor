@@ -18,13 +18,11 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "lis3dh.h"
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "OLED.h"
-#include "fan.h"
-#include <math.h>
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -35,10 +33,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define AHT20_ADDR (0x38 << 1)
-#define DELAY_MAX 1000
-#define HIGH GPIO_PIN_SET
-#define LOW GPIO_PIN_RESET
 
 
 /* USER CODE END PD */
@@ -64,12 +58,7 @@ TIM_HandleTypeDef htim15;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-// static const uint8_t OPT4060_ADDR = 0x44 << 1;
-// static const uint8_t LIS3DH_ADDR = 0x18 << 1;
-// static const uint8_t DISPLAY_ADDR = 0x3C << 1;
-// static const uint8_t TEMP_ADDR = 0x48 << 1;
-// static const uint8_t BMP280_ADDR 0x77 << 1
-// static const uint8_t AHT20_ADDR 0x38 << 1
+
 
 float temp, humidity;
 int pwm_val = 0;
@@ -78,15 +67,7 @@ char pico_tx_buf[64];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
-void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-static void MX_I2C2_Init(void);
-static void MX_ADC1_Init(void);
-static void MX_RTC_Init(void);
-static void MX_TIM15_Init(void);
-static void MX_TIM4_Init(void);
-static void MX_USART2_UART_Init(void);
-static void MX_NVIC_Init(void);
+
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
 
