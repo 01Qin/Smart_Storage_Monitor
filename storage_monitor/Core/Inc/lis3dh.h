@@ -8,8 +8,6 @@
 #ifndef INC_LIS3DH_H_
 #define INC_LIS3DH_H_
 
-#include <string.h>
-#include "main.h"
 #include "i2c.h"
 #include "gpio.h"
 #include "OLED.h"
@@ -21,6 +19,9 @@ void LIS3DH_write(uint8_t reg_addr, uint8_t value);
 void LIS3DH_read_accel(uint8_t reg_addr);
 void LIS3DH_init(uint8_t reg_addr);
 void LIS3DH_read_temp(uint8_t reg_addr);
+
+
+
 
 /* USER CODE END PTD */
 

@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include "lis3dh.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -27,7 +27,18 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
+extern COM_InitTypeDef BspCOMInit;
 
+extern ADC_HandleTypeDef hadc1;
+
+extern I2C_HandleTypeDef hi2c2;
+
+extern RTC_HandleTypeDef hrtc;
+
+extern TIM_HandleTypeDef htim4;
+extern TIM_HandleTypeDef htim15;
+
+extern UART_HandleTypeDef huart2;
 
 /* USER CODE END PTD */
 
@@ -44,18 +55,6 @@
 
 /* Private variables ---------------------------------------------------------*/
 
-COM_InitTypeDef BspCOMInit;
-
-ADC_HandleTypeDef hadc1;
-
-I2C_HandleTypeDef hi2c2;
-
-RTC_HandleTypeDef hrtc;
-
-TIM_HandleTypeDef htim4;
-TIM_HandleTypeDef htim15;
-
-UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
@@ -63,6 +62,14 @@ UART_HandleTypeDef huart2;
 float temp, humidity;
 int pwm_val = 0;
 char pico_tx_buf[64];
+
+
+int16_t X_RAW, Y_RAW, Z_RAW, TEMP_RAW;
+uint8_t check, data[2], accel_data[6], temp_data[2];
+
+float Ax, Ay, Az, temperature;
+
+char tx[100];
 
 /* USER CODE END PV */
 
@@ -149,6 +156,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	AHT20_Init();
+	LIS3DH_init(0x0F); // //WHO_AM_I (0Fh)
 
 	//Display Initialisation
 	//HAL_Delay(100);
@@ -161,6 +169,8 @@ int main(void)
 	OLED_CLS(Display);
 	HAL_Delay(10);
 
+	uint8_t int1_status = 0;
+	uint8_t alarm_triggered = 0;
 
   while (1)
   {
@@ -171,6 +181,17 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  LIS3DH_read_accel(OUT_X_L);		//X-axis acceleration data output
+
+	  X_RAW = (accel_data[1]<<8|accel_data[0]);
+	  		Y_RAW = (accel_data[3]<<8|accel_data[2]);
+	  		Z_RAW = (accel_data[5]<<8|accel_data[4]);
+
+	  		// Convert into 'mg'
+	  		Ax = ( (float)X_RAW / 64.0f ) *  4.0f;
+	  		Ay = ( (float)Y_RAW / 64.0f ) *  4.0f;
+	  		Az = ( (float)Z_RAW / 64.0f ) *  4.0f;
+
        AHT20_Measure();
        if (temp >=25.50){
     	   	   OLED_Show_fan(&hi2c2, 0x78);
@@ -210,11 +231,24 @@ int main(void)
        printf("\n\r");
        printf("Temperature is: %.2f C\n\r", temp);
        printf("Humidity is: %.2f%% \n\r", humidity);
+       printf("X = %.2f, Y = %.2f, Z = %.2f\r\n", Ax, Ay, Az);
 
+       uint8_t reg_addr = 0x31;
+       HAL_I2C_Master_Transmit(&hi2c2, LIS3DH_ADDR, &reg_addr, 1, 1000);
+       HAL_I2C_Master_Receive(&hi2c2, LIS3DH_ADDR, &int1_status, 1, 1000);
+
+      // Bit 6 (0x40) of INT1_SRC goes HIGH if any configured threshold event happened
+      if (int1_status & 0x40)
+      {
+    	  alarm_triggered = 1;
+    	  printf("ALARM TRIGGERED !!! Threshold exceeded!\r\n");
+      }
+      else {
+    	  alarm_triggered = 0;
+      }
 
        uint16_t pico_msg = sprintf(pico_tx_buf, "Temp:%.2f C Hum:%.2f%% Fan speed:%d\n", temp, humidity, pwm_val);
        HAL_UART_Transmit(&huart2, (uint8_t*)pico_tx_buf, pico_msg, HAL_MAX_DELAY);
-
 
 
        uint8_t line = 0;
@@ -245,6 +279,15 @@ int main(void)
 		   OLED_P8x16Str(Display, 0, (line+1) * 2, "           ");
 
 	   }
+
+		 if (alarm_triggered)
+		     {
+		         // Highlight an active warning at the bottom of the screen
+			 	 OLED_P6x8Str(Display, 0, (line + 1) * 2, "HIT DETECTED !!");
+			 	 HAL_Delay(1000);
+		    	 OLED_P6x8Str(Display, 0, (line + 1) * 2, "                ");
+
+		     }
 
 
        HAL_Delay(1000);
@@ -304,7 +347,7 @@ void SystemClock_Config(void)
   * @brief NVIC Configuration.
   * @retval None
   */
-static void MX_NVIC_Init(void)
+void MX_NVIC_Init(void)
 {
   /* EXTI0_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
@@ -322,7 +365,7 @@ static void MX_NVIC_Init(void)
   * @param None
   * @retval None
   */
-static void MX_ADC1_Init(void)
+void MX_ADC1_Init(void)
 {
 
   /* USER CODE BEGIN ADC1_Init 0 */
@@ -390,7 +433,7 @@ static void MX_ADC1_Init(void)
   * @param None
   * @retval None
   */
-static void MX_I2C2_Init(void)
+void MX_I2C2_Init(void)
 {
 
   /* USER CODE BEGIN I2C2_Init 0 */
@@ -438,7 +481,7 @@ static void MX_I2C2_Init(void)
   * @param None
   * @retval None
   */
-static void MX_RTC_Init(void)
+void MX_RTC_Init(void)
 {
 
   /* USER CODE BEGIN RTC_Init 0 */
@@ -475,7 +518,7 @@ static void MX_RTC_Init(void)
   * @param None
   * @retval None
   */
-static void MX_TIM4_Init(void)
+void MX_TIM4_Init(void)
 {
 
   /* USER CODE BEGIN TIM4_Init 0 */
@@ -539,7 +582,7 @@ static void MX_TIM4_Init(void)
   * @param None
   * @retval None
   */
-static void MX_TIM15_Init(void)
+void MX_TIM15_Init(void)
 {
 
   /* USER CODE BEGIN TIM15_Init 0 */
@@ -585,7 +628,7 @@ static void MX_TIM15_Init(void)
   * @param None
   * @retval None
   */
-static void MX_USART2_UART_Init(void)
+void MX_USART2_UART_Init(void)
 {
 
   /* USER CODE BEGIN USART2_Init 0 */
@@ -633,7 +676,7 @@ static void MX_USART2_UART_Init(void)
   * @param None
   * @retval None
   */
-static void MX_GPIO_Init(void)
+void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   /* USER CODE BEGIN MX_GPIO_Init_1 */
