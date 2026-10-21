@@ -193,114 +193,117 @@ HAL_UART_Transmit(
     &huart2,
     (uint8_t *)pico_tx_buf,
     pico_msg,
-    HA*_MAX_DELAY
+    HAL_MAX_DELAY
 );
 ```
 
-### Raspberry P* Pico W
+### Raspberry Pi Pico W
 
 The Pico W uses UART1:
 
-`*`c
+```c
 #define UART_ID uart1
-#define B*UDRATE 115200
-#define UART_TX_PIN *
+#define BAUDRATE 115200
+#define UART_TX_PIN 8
 #define UART_RX_PIN 9
 ```
 
-The re*eived message is parsed using*
+The received message is parsed using
 
 ```c
 sscanf(
     rx_buf,
-    "Te*p:%f C Hum:%f%% Fan speed:%d",
-   *&temp,
-*   &hum,
+    "Temp:%f C Hum:%f%% Fan speed:%d",
+    &temp,
+    &hum,
     &speed
 );
 ```
 
-## Sof*ware*
+## Software
 ### STM32
 
 The STM32 firmware use*:
 
 - STM32 HAL
 - GPIO
-- I2C*- UART
+- I2C2
+- UART
 - Timers / PWM
-- LIS*DH driver
+- LIS3DH driver
 - AHT20 communication
-- *LED display routines
+- OLED display routines
 
 ### Raspberr* Pi Pico W
 
 The Pico W firmware us*s:
 
-- Raspberry*Pi Pico SDK
-- CYW43 Wi*Fi driver
+- Raspberry Pi Pico SDK
+- CYW43 WiFi driver
 - lwIP
 - UART
 - GPIO
 
-##*Project*Structure
+##Project Structure
 
-The repository contains*firmware for two different microco*trollers:
+The repository contains firmware for two different microcontrollers:
 
 ```text
 .
-├── STM*2/
-│   └── STM32G431 firmware*│
+├── STM32/
+│   └── STM32G431 firmware │
 ├── Pico/
-│   └──*Raspberry Pi Pico W firmware
+│   └── Raspberry Pi Pico W firmware
 │
 └──*README.md
 ```
 
-> The exact directo*y structure may vary depending on*how the STM32CubeIDE and Pico SDK *rojects are stored*in the repository.
+> The exact directory structure may vary depending on how the STM32CubeIDE and Pico SDK projects are stored*in the repository.
 
-## Data Flow*Summary
+## Data Flow Summary
 
 ```text
 Sensors
-  *│
+   │
    ▼
 STM32G431
    │
-  *├── Process sensor values
+   ├── Process sensor values
    ├── D*tect excessive movement*impact
    ├── Control cooling fan
-*  ├──*Update OLED display
+   ├── Update OLED display
    │
    ▼
-UART*   │
+UART2   │
    ▼
 Raspberry Pi Pico W
-   │*   ├── Parse STM32 data
-  *├── Wi-Fi connectivity
+   │    ├── Parse STM32 data
+   ├── Wi-Fi connectivity
    │
    ▼
-W*b*Interface
+Web Interface
    │
    ▼
 User
 ```
 
-## F*ture Improvements
+## Future Improvements
 
 Possible improv*ments include:
 
-- Send LIS3DH acce*eration data to the Pico W
-- Displ*y motion/impact alerts on the web *nterface
-- Add*historical temperature and humidit* graphs
+- Send LIS3DH acceleration data to the Pico W
+- Display motion/impact alerts on the web interface
+- Add historical temperature and humidity graphs
 - Add configurable tempera*ure thresholds
 - Improve the UART *rotocol with structured messages
--*Add UART*error checking
-- Add sensor*error handling*- Add remote fan status monitoring*- Store historical*sensor data
+- Add UART error checking
+- Add sensor error handling
+- Add remote fan status monitoring
+- Store historical*sensor data
 - Add timestamps to me*surements
 
 ## Purpose
 
-This projec* demonstrates how two microcontrol*ers can divide responsibilities in*an embedded IoT system.
+This project demonstrates how two microcontrollers can divide responsibilities in an embedded IoT system.
 
-The **STM*2G431** focuses on sensor acquisit*on, real-time processing, display*output, alarms, and actuator*control, while the **Raspberry Pi *ico W***provides wireless connectivity and*exposes the collected information *hrough a web interface.
+The **STM32G431** focuses on sensor acquisition, real-time processing, display*output, alarms, and actuator*control, while the **Raspberry Pi pico W** provides wireless connectivity and exposes the collected information through a web interface.
