@@ -223,7 +223,7 @@ sscanf(
 ## Software
 ### STM32
 
-The STM32 firmware use*:
+The STM32 firmware use:
 
 - STM32 HAL
 - GPIO
@@ -234,7 +234,7 @@ The STM32 firmware use*:
 - AHT20 communication
 - OLED display routines
 
-### Raspberr* Pi Pico W
+### Raspberry Pi Pico W
 
 The Pico W firmware us*s:
 
@@ -289,7 +289,7 @@ User
 
 ## Future Improvements
 
-Possible improv*ments include:
+Possible improvements include:
 
 - Send LIS3DH acceleration data to the Pico W
 - Display motion/impact alerts on the web interface
@@ -299,11 +299,11 @@ Possible improv*ments include:
 - Add UART error checking
 - Add sensor error handling
 - Add remote fan status monitoring
-- Store historical*sensor data
+- Store historical sensor data
 - Add timestamps to me*surements
 
 ## Purpose
 
 This project demonstrates how two microcontrollers can divide responsibilities in an embedded IoT system.
 
-The **STM32G431** focuses on sensor acquisition, real-time processing, display*output, alarms, and actuator*control, while the **Raspberry Pi pico W** provides wireless connectivity and exposes the collected information through a web interface.
+The **STM32G431** focuses on sensor acquisition, real-time processing, display output, alarms, and actuator*control, while the **Raspberry Pi pico W** provides wireless connectivity and exposes the collected information through a web interface.
