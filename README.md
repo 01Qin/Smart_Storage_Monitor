@@ -255,7 +255,7 @@ The repository contains firmware for two different microcontrollers:
 ├── Pico/
 │   └── Raspberry Pi Pico W firmware
 │
-└──*README.md
+└── README.md
 ```
 
 > The exact directory structure may vary depending on how the STM32CubeIDE and Pico SDK projects are stored in the repository.
