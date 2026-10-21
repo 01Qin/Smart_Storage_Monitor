@@ -244,7 +244,7 @@ The Pico W firmware us*s:
 - UART
 - GPIO
 
-##Project Structure
+## Project Structure
 
 The repository contains firmware for two different microcontrollers:
 
@@ -258,7 +258,7 @@ The repository contains firmware for two different microcontrollers:
 └──*README.md
 ```
 
-> The exact directory structure may vary depending on how the STM32CubeIDE and Pico SDK projects are stored*in the repository.
+> The exact directory structure may vary depending on how the STM32CubeIDE and Pico SDK projects are stored in the repository.
 
 ## Data Flow Summary
 
@@ -269,7 +269,7 @@ Sensors
 STM32G431
    │
    ├── Process sensor values
-   ├── D*tect excessive movement*impact
+   ├── Detect excessive movement impact
    ├── Control cooling fan
    ├── Update OLED display
    │
@@ -295,12 +295,12 @@ Possible improvements include:
 - Display motion/impact alerts on the web interface
 - Add historical temperature and humidity graphs
 - Add configurable tempera*ure thresholds
-- Improve the UART *rotocol with structured messages
+- Improve the UART protocol with structured messages
 - Add UART error checking
 - Add sensor error handling
 - Add remote fan status monitoring
 - Store historical sensor data
-- Add timestamps to me*surements
+- Add timestamps to measurements
 
 ## Purpose
 
