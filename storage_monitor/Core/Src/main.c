@@ -26,18 +26,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-extern COM_InitTypeDef BspCOMInit;
 
-extern ADC_HandleTypeDef hadc1;
-
-extern I2C_HandleTypeDef hi2c2;
-
-extern RTC_HandleTypeDef hrtc;
-
-extern TIM_HandleTypeDef htim4;
-extern TIM_HandleTypeDef htim15;
-
-extern UART_HandleTypeDef huart2;
 
 /* USER CODE END PTD */
 
@@ -53,19 +42,19 @@ extern UART_HandleTypeDef huart2;
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+//
+extern COM_InitTypeDef BspCOMInit;
 
-COM_InitTypeDef BspCOMInit;
+extern ADC_HandleTypeDef hadc1;
 
-ADC_HandleTypeDef hadc1;
+extern I2C_HandleTypeDef hi2c2;
 
-I2C_HandleTypeDef hi2c2;
+extern RTC_HandleTypeDef hrtc;
 
-RTC_HandleTypeDef hrtc;
+extern TIM_HandleTypeDef htim4;
+extern TIM_HandleTypeDef htim15;
 
-TIM_HandleTypeDef htim4;
-TIM_HandleTypeDef htim15;
-
-UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
@@ -86,14 +75,14 @@ char tx[100];
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-static void MX_ADC1_Init(void);
-static void MX_RTC_Init(void);
-static void MX_TIM15_Init(void);
-static void MX_TIM4_Init(void);
-static void MX_USART2_UART_Init(void);
-static void MX_I2C2_Init(void);
-static void MX_NVIC_Init(void);
+void MX_GPIO_Init(void);
+void MX_ADC1_Init(void);
+void MX_RTC_Init(void);
+void MX_TIM15_Init(void);
+void MX_TIM4_Init(void);
+void MX_USART2_UART_Init(void);
+void MX_I2C2_Init(void);
+void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
 
@@ -366,7 +355,7 @@ void SystemClock_Config(void)
   * @brief NVIC Configuration.
   * @retval None
   */
-static void MX_NVIC_Init(void)
+void MX_NVIC_Init(void)
 {
   /* EXTI0_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
@@ -378,7 +367,7 @@ static void MX_NVIC_Init(void)
   * @param None
   * @retval None
   */
-static void MX_ADC1_Init(void)
+void MX_ADC1_Init(void)
 {
 
   /* USER CODE BEGIN ADC1_Init 0 */
@@ -446,7 +435,7 @@ static void MX_ADC1_Init(void)
   * @param None
   * @retval None
   */
-static void MX_I2C2_Init(void)
+void MX_I2C2_Init(void)
 {
 
   /* USER CODE BEGIN I2C2_Init 0 */
@@ -494,7 +483,7 @@ static void MX_I2C2_Init(void)
   * @param None
   * @retval None
   */
-static void MX_RTC_Init(void)
+void MX_RTC_Init(void)
 {
 
   /* USER CODE BEGIN RTC_Init 0 */
@@ -531,7 +520,7 @@ static void MX_RTC_Init(void)
   * @param None
   * @retval None
   */
-static void MX_TIM4_Init(void)
+void MX_TIM4_Init(void)
 {
 
   /* USER CODE BEGIN TIM4_Init 0 */
@@ -595,7 +584,7 @@ static void MX_TIM4_Init(void)
   * @param None
   * @retval None
   */
-static void MX_TIM15_Init(void)
+void MX_TIM15_Init(void)
 {
 
   /* USER CODE BEGIN TIM15_Init 0 */
@@ -641,7 +630,7 @@ static void MX_TIM15_Init(void)
   * @param None
   * @retval None
   */
-static void MX_USART2_UART_Init(void)
+void MX_USART2_UART_Init(void)
 {
 
   /* USER CODE BEGIN USART2_Init 0 */
@@ -689,7 +678,7 @@ static void MX_USART2_UART_Init(void)
   * @param None
   * @retval None
   */
-static void MX_GPIO_Init(void)
+void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   /* USER CODE BEGIN MX_GPIO_Init_1 */
