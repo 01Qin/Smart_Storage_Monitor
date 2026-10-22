@@ -42,19 +42,16 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-//
-extern COM_InitTypeDef BspCOMInit;
+ADC_HandleTypeDef hadc1;
 
-extern ADC_HandleTypeDef hadc1;
+I2C_HandleTypeDef hi2c2;
 
-extern I2C_HandleTypeDef hi2c2;
+RTC_HandleTypeDef hrtc;
 
-extern RTC_HandleTypeDef hrtc;
+TIM_HandleTypeDef htim4;
+TIM_HandleTypeDef htim15;
 
-extern TIM_HandleTypeDef htim4;
-extern TIM_HandleTypeDef htim15;
-
-extern UART_HandleTypeDef huart2;
+UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
 
@@ -75,14 +72,14 @@ char tx[100];
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void MX_GPIO_Init(void);
-void MX_ADC1_Init(void);
-void MX_RTC_Init(void);
-void MX_TIM15_Init(void);
-void MX_TIM4_Init(void);
-void MX_USART2_UART_Init(void);
-void MX_I2C2_Init(void);
-void MX_NVIC_Init(void);
+static void MX_GPIO_Init(void);
+static void MX_ADC1_Init(void);
+static void MX_RTC_Init(void);
+static void MX_TIM15_Init(void);
+static void MX_TIM4_Init(void);
+static void MX_USART2_UART_Init(void);
+static void MX_I2C2_Init(void);
+static void MX_NVIC_Init(void);
 /* USER CODE BEGIN PFP */
 /* USER CODE END PFP */
 
@@ -136,30 +133,6 @@ int main(void)
   HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2);
 
   /* USER CODE END 2 */
-
-  /* Initialize leds */
-  BSP_LED_Init(LED_GREEN);
-
-  /* Initialize COM1 port (115200, 8 bits (7-bit data + 1 stop bit), no parity */
-  BspCOMInit.BaudRate   = 115200;
-  BspCOMInit.WordLength = COM_WORDLENGTH_8B;
-  BspCOMInit.StopBits   = COM_STOPBITS_1;
-  BspCOMInit.Parity     = COM_PARITY_NONE;
-  BspCOMInit.HwFlowCtl  = COM_HWCONTROL_NONE;
-  if (BSP_COM_Init(COM1, &BspCOMInit) != BSP_ERROR_NONE)
-  {
-    Error_Handler();
-  }
-
-  /* USER CODE BEGIN BSP */
-
-  /* -- Sample board code to send message over COM1 port ---- */
-  printf("Welcome to STM32 world !\n\r");
-
-  /* -- Sample board code to switch on leds ---- */
-  BSP_LED_On(LED_GREEN);
-
-  /* USER CODE END BSP */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -326,11 +299,11 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
-  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV4;
-  RCC_OscInitStruct.PLL.PLLN = 32;
+  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV1;
+  RCC_OscInitStruct.PLL.PLLN = 8;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
-  RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV4;
+  RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -341,7 +314,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV2;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
@@ -355,7 +328,7 @@ void SystemClock_Config(void)
   * @brief NVIC Configuration.
   * @retval None
   */
-void MX_NVIC_Init(void)
+static void MX_NVIC_Init(void)
 {
   /* EXTI0_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
@@ -367,7 +340,7 @@ void MX_NVIC_Init(void)
   * @param None
   * @retval None
   */
-void MX_ADC1_Init(void)
+static void MX_ADC1_Init(void)
 {
 
   /* USER CODE BEGIN ADC1_Init 0 */
@@ -435,7 +408,7 @@ void MX_ADC1_Init(void)
   * @param None
   * @retval None
   */
-void MX_I2C2_Init(void)
+static void MX_I2C2_Init(void)
 {
 
   /* USER CODE BEGIN I2C2_Init 0 */
@@ -483,7 +456,7 @@ void MX_I2C2_Init(void)
   * @param None
   * @retval None
   */
-void MX_RTC_Init(void)
+static void MX_RTC_Init(void)
 {
 
   /* USER CODE BEGIN RTC_Init 0 */
@@ -520,7 +493,7 @@ void MX_RTC_Init(void)
   * @param None
   * @retval None
   */
-void MX_TIM4_Init(void)
+static void MX_TIM4_Init(void)
 {
 
   /* USER CODE BEGIN TIM4_Init 0 */
@@ -584,7 +557,7 @@ void MX_TIM4_Init(void)
   * @param None
   * @retval None
   */
-void MX_TIM15_Init(void)
+static void MX_TIM15_Init(void)
 {
 
   /* USER CODE BEGIN TIM15_Init 0 */
@@ -630,7 +603,7 @@ void MX_TIM15_Init(void)
   * @param None
   * @retval None
   */
-void MX_USART2_UART_Init(void)
+static void MX_USART2_UART_Init(void)
 {
 
   /* USER CODE BEGIN USART2_Init 0 */
@@ -678,7 +651,7 @@ void MX_USART2_UART_Init(void)
   * @param None
   * @retval None
   */
-void MX_GPIO_Init(void)
+static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
   /* USER CODE BEGIN MX_GPIO_Init_1 */
@@ -691,7 +664,7 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, BlueLed_Pin|Tach_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, blue_led_Pin|Tach_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_11, GPIO_PIN_SET);
@@ -702,8 +675,8 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : BlueLed_Pin PA11 Tach_Pin */
-  GPIO_InitStruct.Pin = BlueLed_Pin|GPIO_PIN_11|Tach_Pin;
+  /*Configure GPIO pins : blue_led_Pin PA11 Tach_Pin */
+  GPIO_InitStruct.Pin = blue_led_Pin|GPIO_PIN_11|Tach_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -796,32 +769,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 
   /* USER CODE END Callback 1 */
 }
-/* USER CODE BEGIN Header */
-/**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2026 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
-/* USER CODE END Header */
-
-/**
-  * @}
-  */
-
-/**
-  * @}
-  */
 
 /**
   * @brief  This function is executed in case of error occurrence.

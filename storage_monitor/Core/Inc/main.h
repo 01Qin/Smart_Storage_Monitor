@@ -29,9 +29,6 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32g4xx_hal.h"
 
-#include "stm32g4xx_nucleo.h"
-#include <stdio.h>
-
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "OLED.h"
@@ -53,6 +50,7 @@ extern "C" {
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
 
+/* USER CODE END EM */
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
 
@@ -65,8 +63,8 @@ void AHT20_Measure (void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define BlueLed_Pin GPIO_PIN_4
-#define BlueLed_GPIO_Port GPIOA
+#define blue_led_Pin GPIO_PIN_4
+#define blue_led_GPIO_Port GPIOA
 #define Tach_Pin GPIO_PIN_15
 #define Tach_GPIO_Port GPIOA
 
