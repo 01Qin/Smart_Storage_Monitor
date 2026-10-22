@@ -31,10 +31,12 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include <stdio.h>
 #include "OLED.h"
 #include "fan.h"
 #include <math.h>
 #include "lis3dh.h"
+#include "stm32g4xx_nucleo.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

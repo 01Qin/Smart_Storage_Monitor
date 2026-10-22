@@ -29,18 +29,17 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
- COM_InitTypeDef BspCOMInit;
+extern COM_InitTypeDef BspCOMInit;
+extern ADC_HandleTypeDef hadc1;
 
-ADC_HandleTypeDef hadc1;
+extern I2C_HandleTypeDef hi2c2;
 
- I2C_HandleTypeDef hi2c2;
+extern RTC_HandleTypeDef hrtc;
 
- RTC_HandleTypeDef hrtc;
+extern TIM_HandleTypeDef htim4;
+extern TIM_HandleTypeDef htim15;
 
- TIM_HandleTypeDef htim4;
- TIM_HandleTypeDef htim15;
-
- UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef huart2;
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
