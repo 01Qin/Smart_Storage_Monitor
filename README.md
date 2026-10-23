@@ -294,7 +294,7 @@ Possible improvements include:
 - Send LIS3DH acceleration data to the Pico W
 - Display motion/impact alerts on the web interface
 - Add historical temperature and humidity graphs
-- Add configurable tempera*ure thresholds
+- Add configurable temperature thresholds
 - Improve the UART protocol with structured messages
 - Add UART error checking
 - Add sensor error handling
@@ -306,4 +306,4 @@ Possible improvements include:
 
 This project demonstrates how two microcontrollers can divide responsibilities in an embedded IoT system.
 
-The **STM32G431** focuses on sensor acquisition, real-time processing, display output, alarms, and actuator*control, while the **Raspberry Pi pico W** provides wireless connectivity and exposes the collected information through a web interface.
+The **STM32G431** focuses on sensor acquisition, real-time processing, display output, alarms, and actuator control, while the **Raspberry Pi pico W** provides wireless connectivity and exposes the collected information through a web interface.

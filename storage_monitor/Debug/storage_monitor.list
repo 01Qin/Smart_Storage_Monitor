@@ -27,25 +27,25 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  000101d4  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00020640  00000000  00000000  00010204  2**0
+ 12 .debug_info   00020516  00000000  00000000  00010204  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00003c2b  00000000  00000000  00030844  2**0
+ 13 .debug_abbrev 00003c1a  00000000  00000000  0003071a  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00001bf0  00000000  00000000  00034470  2**3
+ 14 .debug_aranges 00001bf0  00000000  00000000  00034338  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_rnglists 000015ac  00000000  00000000  00036060  2**0
+ 15 .debug_rnglists 000015ac  00000000  00000000  00035f28  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  00024029  00000000  00000000  0003760c  2**0
+ 16 .debug_macro  00024029  00000000  00000000  000374d4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0001fb38  00000000  00000000  0005b635  2**0
+ 17 .debug_line   0001fb38  00000000  00000000  0005b4fd  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    000e8433  00000000  00000000  0007b16d  2**0
+ 18 .debug_str    000e8428  00000000  00000000  0007b035  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  001635a0  2**0
+ 19 .comment      00000043  00000000  00000000  0016345d  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000087b4  00000000  00000000  001635e4  2**2
+ 20 .debug_frame  000087b4  00000000  00000000  001634a0  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000073  00000000  00000000  0016bd98  2**0
+ 21 .debug_line_str 00000073  00000000  00000000  0016bc54  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2726,7 +2726,7 @@ int main(void)
 
   /* Initialize interrupts */
   MX_NVIC_Init();
- 80019a8:	f000 fae8 	bl	8001f7c <MX_NVIC_Init>
+ 80019a8:	f000 fae7 	bl	8001f7a <MX_NVIC_Init>
   /* USER CODE BEGIN 2 */
   TIM4->CCR1 = 50;
  80019ac:	4b9a      	ldr	r3, [pc, #616]	@ (8001c18 <main+0x29c>)
@@ -3417,116 +3417,117 @@ void SystemClock_Config(void)
 
   /** Configure the main internal regulator output voltage
   */
-  HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1);
- 8001f02:	f44f 7000 	mov.w	r0, #512	@ 0x200
- 8001f06:	f003 fa3f 	bl	8005388 <HAL_PWREx_ControlVoltageScaling>
+  HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1_BOOST);
+ 8001f02:	2000      	movs	r0, #0
+ 8001f04:	f003 fa40 	bl	8005388 <HAL_PWREx_ControlVoltageScaling>
 
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSI;
- 8001f0a:	230a      	movs	r3, #10
- 8001f0c:	61bb      	str	r3, [r7, #24]
+ 8001f08:	230a      	movs	r3, #10
+ 8001f0a:	61bb      	str	r3, [r7, #24]
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
- 8001f0e:	f44f 7380 	mov.w	r3, #256	@ 0x100
- 8001f12:	627b      	str	r3, [r7, #36]	@ 0x24
+ 8001f0c:	f44f 7380 	mov.w	r3, #256	@ 0x100
+ 8001f10:	627b      	str	r3, [r7, #36]	@ 0x24
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
- 8001f14:	2340      	movs	r3, #64	@ 0x40
- 8001f16:	62bb      	str	r3, [r7, #40]	@ 0x28
+ 8001f12:	2340      	movs	r3, #64	@ 0x40
+ 8001f14:	62bb      	str	r3, [r7, #40]	@ 0x28
   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
- 8001f18:	2301      	movs	r3, #1
- 8001f1a:	62fb      	str	r3, [r7, #44]	@ 0x2c
+ 8001f16:	2301      	movs	r3, #1
+ 8001f18:	62fb      	str	r3, [r7, #44]	@ 0x2c
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
- 8001f1c:	2302      	movs	r3, #2
- 8001f1e:	637b      	str	r3, [r7, #52]	@ 0x34
+ 8001f1a:	2302      	movs	r3, #2
+ 8001f1c:	637b      	str	r3, [r7, #52]	@ 0x34
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
- 8001f20:	2302      	movs	r3, #2
- 8001f22:	63bb      	str	r3, [r7, #56]	@ 0x38
-  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV1;
- 8001f24:	2301      	movs	r3, #1
- 8001f26:	63fb      	str	r3, [r7, #60]	@ 0x3c
-  RCC_OscInitStruct.PLL.PLLN = 8;
- 8001f28:	2308      	movs	r3, #8
- 8001f2a:	643b      	str	r3, [r7, #64]	@ 0x40
+ 8001f1e:	2302      	movs	r3, #2
+ 8001f20:	63bb      	str	r3, [r7, #56]	@ 0x38
+  RCC_OscInitStruct.PLL.PLLM = RCC_PLLM_DIV4;
+ 8001f22:	2304      	movs	r3, #4
+ 8001f24:	63fb      	str	r3, [r7, #60]	@ 0x3c
+  RCC_OscInitStruct.PLL.PLLN = 85;
+ 8001f26:	2355      	movs	r3, #85	@ 0x55
+ 8001f28:	643b      	str	r3, [r7, #64]	@ 0x40
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
- 8001f2c:	2302      	movs	r3, #2
- 8001f2e:	647b      	str	r3, [r7, #68]	@ 0x44
+ 8001f2a:	2302      	movs	r3, #2
+ 8001f2c:	647b      	str	r3, [r7, #68]	@ 0x44
   RCC_OscInitStruct.PLL.PLLQ = RCC_PLLQ_DIV2;
- 8001f30:	2302      	movs	r3, #2
- 8001f32:	64bb      	str	r3, [r7, #72]	@ 0x48
+ 8001f2e:	2302      	movs	r3, #2
+ 8001f30:	64bb      	str	r3, [r7, #72]	@ 0x48
   RCC_OscInitStruct.PLL.PLLR = RCC_PLLR_DIV2;
- 8001f34:	2302      	movs	r3, #2
- 8001f36:	64fb      	str	r3, [r7, #76]	@ 0x4c
+ 8001f32:	2302      	movs	r3, #2
+ 8001f34:	64fb      	str	r3, [r7, #76]	@ 0x4c
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
- 8001f38:	f107 0318 	add.w	r3, r7, #24
- 8001f3c:	4618      	mov	r0, r3
- 8001f3e:	f003 fad7 	bl	80054f0 <HAL_RCC_OscConfig>
- 8001f42:	4603      	mov	r3, r0
- 8001f44:	2b00      	cmp	r3, #0
- 8001f46:	d001      	beq.n	8001f4c <SystemClock_Config+0x6c>
+ 8001f36:	f107 0318 	add.w	r3, r7, #24
+ 8001f3a:	4618      	mov	r0, r3
+ 8001f3c:	f003 fad8 	bl	80054f0 <HAL_RCC_OscConfig>
+ 8001f40:	4603      	mov	r3, r0
+ 8001f42:	2b00      	cmp	r3, #0
+ 8001f44:	d001      	beq.n	8001f4a <SystemClock_Config+0x6a>
   {
     Error_Handler();
- 8001f48:	f000 fb71 	bl	800262e <Error_Handler>
+ 8001f46:	f000 fb72 	bl	800262e <Error_Handler>
   }
 
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
- 8001f4c:	230f      	movs	r3, #15
- 8001f4e:	607b      	str	r3, [r7, #4]
+ 8001f4a:	230f      	movs	r3, #15
+ 8001f4c:	607b      	str	r3, [r7, #4]
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
- 8001f50:	2303      	movs	r3, #3
- 8001f52:	60bb      	str	r3, [r7, #8]
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV2;
- 8001f54:	2380      	movs	r3, #128	@ 0x80
- 8001f56:	60fb      	str	r3, [r7, #12]
+ 8001f4e:	2303      	movs	r3, #3
+ 8001f50:	60bb      	str	r3, [r7, #8]
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+ 8001f52:	2300      	movs	r3, #0
+ 8001f54:	60fb      	str	r3, [r7, #12]
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
- 8001f58:	2300      	movs	r3, #0
- 8001f5a:	613b      	str	r3, [r7, #16]
+ 8001f56:	2300      	movs	r3, #0
+ 8001f58:	613b      	str	r3, [r7, #16]
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
- 8001f5c:	2300      	movs	r3, #0
- 8001f5e:	617b      	str	r3, [r7, #20]
+ 8001f5a:	2300      	movs	r3, #0
+ 8001f5c:	617b      	str	r3, [r7, #20]
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
- 8001f60:	1d3b      	adds	r3, r7, #4
- 8001f62:	2101      	movs	r1, #1
- 8001f64:	4618      	mov	r0, r3
- 8001f66:	f003 fdd5 	bl	8005b14 <HAL_RCC_ClockConfig>
- 8001f6a:	4603      	mov	r3, r0
- 8001f6c:	2b00      	cmp	r3, #0
- 8001f6e:	d001      	beq.n	8001f74 <SystemClock_Config+0x94>
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
+ 8001f5e:	1d3b      	adds	r3, r7, #4
+ 8001f60:	2104      	movs	r1, #4
+ 8001f62:	4618      	mov	r0, r3
+ 8001f64:	f003 fdd6 	bl	8005b14 <HAL_RCC_ClockConfig>
+ 8001f68:	4603      	mov	r3, r0
+ 8001f6a:	2b00      	cmp	r3, #0
+ 8001f6c:	d001      	beq.n	8001f72 <SystemClock_Config+0x92>
   {
     Error_Handler();
- 8001f70:	f000 fb5d 	bl	800262e <Error_Handler>
+ 8001f6e:	f000 fb5e 	bl	800262e <Error_Handler>
   }
 }
- 8001f74:	bf00      	nop
- 8001f76:	3750      	adds	r7, #80	@ 0x50
- 8001f78:	46bd      	mov	sp, r7
- 8001f7a:	bd80      	pop	{r7, pc}
+ 8001f72:	bf00      	nop
+ 8001f74:	3750      	adds	r7, #80	@ 0x50
+ 8001f76:	46bd      	mov	sp, r7
+ 8001f78:	bd80      	pop	{r7, pc}
 
-08001f7c <MX_NVIC_Init>:
+08001f7a <MX_NVIC_Init>:
 /**
   * @brief NVIC Configuration.
   * @retval None
   */
  void MX_NVIC_Init(void)
 {
- 8001f7c:	b580      	push	{r7, lr}
- 8001f7e:	af00      	add	r7, sp, #0
+ 8001f7a:	b580      	push	{r7, lr}
+ 8001f7c:	af00      	add	r7, sp, #0
   /* EXTI0_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(EXTI0_IRQn, 0, 0);
- 8001f80:	2200      	movs	r2, #0
- 8001f82:	2100      	movs	r1, #0
- 8001f84:	2006      	movs	r0, #6
- 8001f86:	f002 f817 	bl	8003fb8 <HAL_NVIC_SetPriority>
+ 8001f7e:	2200      	movs	r2, #0
+ 8001f80:	2100      	movs	r1, #0
+ 8001f82:	2006      	movs	r0, #6
+ 8001f84:	f002 f818 	bl	8003fb8 <HAL_NVIC_SetPriority>
   HAL_NVIC_EnableIRQ(EXTI0_IRQn);
- 8001f8a:	2006      	movs	r0, #6
- 8001f8c:	f002 f82e 	bl	8003fec <HAL_NVIC_EnableIRQ>
+ 8001f88:	2006      	movs	r0, #6
+ 8001f8a:	f002 f82f 	bl	8003fec <HAL_NVIC_EnableIRQ>
 }
- 8001f90:	bf00      	nop
- 8001f92:	bd80      	pop	{r7, pc}
+ 8001f8e:	bf00      	nop
+ 8001f90:	bd80      	pop	{r7, pc}
+	...
 
 08001f94 <MX_ADC1_Init>:
   * @brief ADC1 Initialization Function
@@ -3564,9 +3565,9 @@ void SystemClock_Config(void)
  8001fb2:	4b32      	ldr	r3, [pc, #200]	@ (800207c <MX_ADC1_Init+0xe8>)
  8001fb4:	f04f 42a0 	mov.w	r2, #1342177280	@ 0x50000000
  8001fb8:	601a      	str	r2, [r3, #0]
-  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
+  hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
  8001fba:	4b30      	ldr	r3, [pc, #192]	@ (800207c <MX_ADC1_Init+0xe8>)
- 8001fbc:	f44f 3200 	mov.w	r2, #131072	@ 0x20000
+ 8001fbc:	f44f 3240 	mov.w	r2, #196608	@ 0x30000
  8001fc0:	605a      	str	r2, [r3, #4]
   hadc1.Init.Resolution = ADC_RESOLUTION_12B;
  8001fc2:	4b2e      	ldr	r3, [pc, #184]	@ (800207c <MX_ADC1_Init+0xe8>)
@@ -3703,7 +3704,7 @@ void SystemClock_Config(void)
   * @param None
   * @retval None
   */
- void MX_I2C2_Init(void)
+void MX_I2C2_Init(void)
 {
  8002084:	b580      	push	{r7, lr}
  8002086:	af00      	add	r7, sp, #0
@@ -3716,7 +3717,7 @@ void SystemClock_Config(void)
  8002088:	4b1b      	ldr	r3, [pc, #108]	@ (80020f8 <MX_I2C2_Init+0x74>)
  800208a:	4a1c      	ldr	r2, [pc, #112]	@ (80020fc <MX_I2C2_Init+0x78>)
  800208c:	601a      	str	r2, [r3, #0]
-  hi2c2.Init.Timing = 0x00B07CB4;
+  hi2c2.Init.Timing = 0x40B285C2;
  800208e:	4b1a      	ldr	r3, [pc, #104]	@ (80020f8 <MX_I2C2_Init+0x74>)
  8002090:	4a1b      	ldr	r2, [pc, #108]	@ (8002100 <MX_I2C2_Init+0x7c>)
  8002092:	605a      	str	r2, [r3, #4]
@@ -3796,14 +3797,14 @@ void SystemClock_Config(void)
  80020f6:	bf00      	nop
  80020f8:	2000027c 	.word	0x2000027c
  80020fc:	40005800 	.word	0x40005800
- 8002100:	00b07cb4 	.word	0x00b07cb4
+ 8002100:	40b285c2 	.word	0x40b285c2
 
 08002104 <MX_RTC_Init>:
   * @brief RTC Initialization Function
   * @param None
   * @retval None
   */
- void MX_RTC_Init(void)
+void MX_RTC_Init(void)
 {
  8002104:	b580      	push	{r7, lr}
  8002106:	af00      	add	r7, sp, #0
@@ -3873,7 +3874,7 @@ void SystemClock_Config(void)
   * @param None
   * @retval None
   */
- void MX_TIM4_Init(void)
+void MX_TIM4_Init(void)
 {
  800215c:	b580      	push	{r7, lr}
  800215e:	b08e      	sub	sp, #56	@ 0x38
