@@ -36,7 +36,6 @@ extern "C" {
 
 /* USER CODE END Private defines */
 
-static void MX_GPIO_Init();
 
 /* USER CODE BEGIN Prototypes */
 
